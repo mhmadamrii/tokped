@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { CreatePost } from "~/app/_components/create-post";
 import { getServerAuthSession } from "~/server/auth";
-import { Button } from "@nextui-org/button";
 import { api } from "~/trpc/server";
 
 export default async function Home() {
@@ -76,7 +75,6 @@ async function CrudShowcase() {
       ) : (
         <p>You have no posts yet.</p>
       )}
-      <Button color="primary">Button to add something</Button>
 
       <CreatePost />
     </div>
