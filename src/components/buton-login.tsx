@@ -1,6 +1,10 @@
 import Link from 'next/link';
 
+import { useSession } from 'next-auth/react';
 import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
+import { Label } from '~/components/ui/label';
+
 import {
   Dialog,
   DialogContent,
@@ -11,12 +15,9 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
-import { getServerAuthSession } from '~/server/auth';
+export function ButtonLogin() {
+  const session = useSession();
 
-export async function ButtonLogin() {
-  const session = await getServerAuthSession();
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -60,7 +61,7 @@ export async function ButtonLogin() {
         <DialogFooter>
           <Link
             href={
-              session
+              session.data
                 ? '/api/auth/signout'
                 : '/api/auth/signin'
             }

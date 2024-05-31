@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -40,6 +41,8 @@ const FormSchema = z.object({
 });
 
 export default function RegisterForm() {
+  const session = useSession();
+  console.log('session user', session);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {

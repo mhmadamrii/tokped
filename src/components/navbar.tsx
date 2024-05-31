@@ -1,26 +1,33 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import HoverCategory from '~/app/(auth)/login/_components/hover-category';
 
-import { headers } from 'next/headers';
+import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { Cart } from './cart';
 import { InputCategory } from './input-category';
 import { ButtonLogin } from './buton-login';
-import { getServerAuthSession } from '~/server/auth';
 
-export default async function Navbar() {
-  const session = await getServerAuthSession();
-  const headersList = headers();
+export default function Navbar() {
+  const session = useSession();
+  const pathname = usePathname();
+  console.log('pathname', pathname);
 
-  if (headersList.get('x-pathname') == '/register')
+  // const headersList = headers();
+
+  if (pathname == '/register')
     return (
       <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-center px-3 py-3">
-        <Image
-          width={150}
-          height={70}
-          src="https://images.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"
-          alt="logo"
-        />
+        <Link href="/">
+          <Image
+            width={150}
+            height={70}
+            src="https://images.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"
+            alt="logo"
+          />
+        </Link>
       </div>
     );
 
@@ -46,7 +53,7 @@ export default async function Navbar() {
         <Cart />
       </div>
 
-      {session ? (
+      {session.data ? (
         <Link href="/login">sign out</Link>
       ) : (
         <div className="flex gap-2">

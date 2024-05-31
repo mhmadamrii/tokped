@@ -13,6 +13,7 @@ import {
   type inferRouterInputs,
   type inferRouterOutputs,
 } from '@trpc/server';
+import { SessionProvider } from 'next-auth/react';
 import { useState } from 'react';
 import SuperJSON from 'superjson';
 
@@ -81,7 +82,7 @@ export function TRPCReactProvider(props: {
         client={trpcClient}
         queryClient={queryClient}
       >
-        {props.children}
+        <SessionProvider>{props.children}</SessionProvider>
       </api.Provider>
     </QueryClientProvider>
   );
