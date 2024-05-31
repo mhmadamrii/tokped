@@ -19,12 +19,13 @@ export default async function RootLayout({
 }) {
   const session = await getServerAuthSession();
   console.log('session user', session);
+
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          <Navbar />
-          <div className="min-w-[500px] border border-red-500">
+          <div className="min-w-[500px]">
+            <Navbar />
             {children}
           </div>
         </TRPCReactProvider>

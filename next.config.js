@@ -26,6 +26,12 @@ const config = {
         port: '',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.tokopedia.net',
+        port: '',
+        pathname: '**',
+      },
     ],
   },
 };

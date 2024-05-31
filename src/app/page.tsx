@@ -3,6 +3,7 @@ import { CarouselBanner } from '~/components/carousel-banner';
 import { getServerAuthSession } from '~/server/auth';
 
 import FakeProducts from '~/components/fake-products';
+import Link from 'next/link';
 
 export default async function Homepage() {
   const session = await getServerAuthSession();
@@ -13,6 +14,9 @@ export default async function Homepage() {
         <CarouselBanner />
       </div>
 
+      <Link href={`/join-seller/${session?.user.id}`}>
+        join seller
+      </Link>
       <div>
         <Suspense fallback={<span>Loading datas</span>}>
           <FakeProducts />

@@ -56,7 +56,7 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
-    name          String?
+    username      String?
     email         String?   @unique
     emailVerified DateTime?
     image         String?
@@ -123,6 +123,7 @@ model Profile {
     phone     String?
     avatarUrl String?
     bio       String?
+    isSeller  Boolean @default(false)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
