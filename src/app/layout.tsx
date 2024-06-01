@@ -24,9 +24,11 @@ export default async function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          <div className="w-full sm:min-w-[500px]">
+          <div className="flex w-full flex-col justify-center  sm:min-w-[500px]">
             <Navbar />
-            {children}
+            <div className="mx-auto max-w-[1300px] flex-grow">
+              {children}
+            </div>
           </div>
         </TRPCReactProvider>
       </body>

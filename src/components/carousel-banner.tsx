@@ -15,7 +15,7 @@ import {
 
 export function CarouselBanner() {
   return (
-    <div className="flex h-[300px] w-full items-center justify-center border border-blue-500 px-20">
+    <div className="flex h-[300px] w-full items-center justify-center px-20">
       <Carousel
         className="flex h-full w-full items-center justify-center"
         plugins={[
@@ -24,7 +24,7 @@ export function CarouselBanner() {
           }),
         ]}
       >
-        <CarouselContent className="h-full w-screen bg-blue-500">
+        <CarouselContent className="h-full w-screen">
           {BANNER_SLIDERS.map((_, index) => (
             <CarouselItem
               key={index}
