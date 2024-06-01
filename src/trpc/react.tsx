@@ -4,6 +4,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
+
 import {
   loggerLink,
   unstable_httpBatchStreamLink,
@@ -16,6 +17,7 @@ import {
 import { SessionProvider } from 'next-auth/react';
 import { useState } from 'react';
 import SuperJSON from 'superjson';
+import { Toaster } from 'sonner';
 
 import { type AppRouter } from '~/server/api/root';
 
@@ -82,7 +84,10 @@ export function TRPCReactProvider(props: {
         client={trpcClient}
         queryClient={queryClient}
       >
-        <SessionProvider>{props.children}</SessionProvider>
+        <SessionProvider>
+          <Toaster richColors />
+          {props.children}
+        </SessionProvider>
       </api.Provider>
     </QueryClientProvider>
   );

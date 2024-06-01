@@ -24,7 +24,7 @@ export default async function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          <div className="min-w-[500px]">
+          <div className="w-full sm:min-w-[500px]">
             <Navbar />
             {children}
           </div>

@@ -3,7 +3,7 @@ import RegisterForm from './_components/register-form';
 
 export default function Register() {
   return (
-    <div className="flex h-screen flex-1 items-center justify-center gap-12 px-10">
+    <div className="flex h-screen flex-1 items-center justify-center gap-12 px-0 sm:px-10">
       <div className="hidden flex-col sm:flex">
         <Image
           src="https://images.tokopedia.net/img/content/register_new.png"

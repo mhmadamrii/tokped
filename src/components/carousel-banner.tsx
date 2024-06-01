@@ -15,26 +15,28 @@ import {
 
 export function CarouselBanner() {
   return (
-    <div className="flex w-[500px] items-center justify-center p-2">
+    <div className="flex h-[300px] w-full items-center justify-center border border-blue-500 px-20">
       <Carousel
-        className="w-full"
+        className="flex h-full w-full items-center justify-center"
         plugins={[
           Autoplay({
-            delay: 1500,
+            delay: 3500,
           }),
         ]}
       >
-        <CarouselContent className="w-full">
+        <CarouselContent className="h-full w-screen bg-blue-500">
           {BANNER_SLIDERS.map((_, index) => (
-            <CarouselItem key={index}>
-              <div className="h-[100px]">
-                <Image
-                  src={_.content}
-                  alt="banner"
-                  width={100}
-                  height={50}
-                />
-              </div>
+            <CarouselItem
+              key={index}
+              className="flex h-[300px] w-full items-center justify-center"
+            >
+              <Image
+                src={_.content}
+                alt="banner"
+                width={700}
+                height={300}
+                className="rounded-md"
+              />
             </CarouselItem>
           ))}
         </CarouselContent>

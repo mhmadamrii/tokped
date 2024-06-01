@@ -13,13 +13,10 @@ import { ButtonLogin } from './buton-login';
 export default function Navbar() {
   const session = useSession();
   const pathname = usePathname();
-  console.log('pathname', pathname);
-
-  // const headersList = headers();
 
   if (pathname == '/register')
     return (
-      <div className="absolute left-0 right-0 top-0 flex w-full items-center justify-center px-3 py-3">
+      <header className="absolute left-0 right-0 top-0 flex w-full items-center justify-center px-3 py-3">
         <Link href="/">
           <Image
             width={150}
@@ -28,16 +25,16 @@ export default function Navbar() {
             alt="logo"
           />
         </Link>
-      </div>
+      </header>
     );
 
   return (
-    <header className="sticky left-0 right-0 top-0 z-50 flex h-[100px] items-center justify-between gap-4 border border-red-500 bg-white px-3">
+    <header className="sticky left-0 right-0 top-0 z-50 flex h-[100px] items-center justify-between gap-4 bg-white px-3">
       <div className="flex gap-2">
         <Link href="/">
           <Image
-            width={150}
-            height={70}
+            width={250}
+            height={100}
             src="https://images.tokopedia.net/assets-tokopedia-lite/v2/zeus/production/e5b8438b.svg"
             alt="logo"
           />
