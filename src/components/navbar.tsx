@@ -39,7 +39,7 @@ export default function Navbar() {
     );
 
   return (
-    <header className="sticky left-0 right-0 top-0 z-50 flex h-[100px] items-center justify-between gap-4 bg-white px-3">
+    <header className="sticky left-0 right-0 top-0 z-50 flex h-[100px] items-center justify-between gap-4 border bg-white px-7">
       <div className="flex gap-2">
         <Link href="/">
           <Image
@@ -56,9 +56,7 @@ export default function Navbar() {
         <InputCategory />
       </div>
 
-      <div className="cursor-pointer">
-        <Cart />
-      </div>
+      <Cart />
 
       {session.data ? (
         <Button onClick={() => signOut()}>Sign out</Button>

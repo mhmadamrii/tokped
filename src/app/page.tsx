@@ -12,9 +12,6 @@ export default async function Homepage() {
   return (
     <main>
       <CarouselBanner />
-      {/* <Link href={`/join-seller/${session?.user.id}`}>
-        join seller
-      </Link> */}
       <ProductCategories />
       <Suspense fallback={<span>Loading datas</span>}>
         <FakeProducts />

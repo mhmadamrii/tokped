@@ -40,11 +40,10 @@ async function getFakeProducts(): Promise<TProduct[]> {
 
 export async function ProductCategories() {
   const fakeProducts = await getFakeProducts();
-  // console.log(fakeProducts);
 
   return (
-    <div className="mx-4 my-4 flex justify-between gap-5 rounded-md border p-5 px-5">
-      <div className="flex w-1/2 flex-col gap-3">
+    <div className="mx-4 my-4 flex flex-col justify-between gap-5 rounded-md border p-5 px-5 shadow-sm sm:flex-row">
+      <div className="flex w-full flex-col gap-3 sm:w-1/2">
         <h1 className="text-xl font-bold">
           Kategori Pilihan
         </h1>
@@ -56,8 +55,8 @@ export async function ProductCategories() {
                 key={index}
                 className="md:basis-1/2 lg:basis-1/3"
               >
-                <Card className="shadow-sm">
-                  <CardContent className="flex aspect-square h-full flex-col items-center justify-center">
+                <Card className="h-[300px] shadow-sm sm:h-full">
+                  <CardContent className="flex aspect-auto h-full flex-col items-center justify-center sm:aspect-square">
                     <div className="flex h-full w-full flex-grow flex-col sm:p-6">
                       <Link
                         href={`/product/${_.id}`}
@@ -83,7 +82,7 @@ export async function ProductCategories() {
         </Carousel>
       </div>
 
-      <div className="flex w-1/2 flex-col gap-3">
+      <div className="flex w-full flex-col gap-3 sm:w-1/2">
         <h1 className="text-xl font-bold">
           Top Up & Tagihan
         </h1>

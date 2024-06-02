@@ -24,7 +24,7 @@ export default async function RootLayout({
         <TRPCReactProvider>
           <div className="flex w-full flex-col justify-center  sm:min-w-[500px]">
             <Navbar />
-            <div className="mx-auto max-w-[1300px] flex-grow">
+            <div className="mx-auto w-full flex-grow sm:max-w-[1300px]">
               {children}
             </div>
           </div>
