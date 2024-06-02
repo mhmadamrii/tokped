@@ -3,12 +3,22 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import HoverCategory from '~/app/(auth)/login/_components/hover-category';
+import dynamic from 'next/dynamic';
 
+import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Cart } from './cart';
 import { InputCategory } from './input-category';
-import { ButtonLogin } from './buton-login';
+import { Button } from './ui/button';
+
+const ButtonLogin = dynamic(
+  () =>
+    import('./button-login').then((mod) => mod.ButtonLogin),
+  {
+    ssr: false,
+  },
+);
 
 export default function Navbar() {
   const session = useSession();
@@ -51,7 +61,7 @@ export default function Navbar() {
       </div>
 
       {session.data ? (
-        <Link href="/login">sign out</Link>
+        <Button onClick={() => signOut()}>Sign out</Button>
       ) : (
         <div className="flex gap-2">
           <ButtonLogin />

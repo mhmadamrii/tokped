@@ -37,6 +37,7 @@ export default function RegisterForm() {
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
+      password: '',
       username: '',
       email: '',
     },
@@ -47,12 +48,15 @@ export default function RegisterForm() {
       form.reset();
       toast.success('User has been created');
     },
-    onError: (err) =>
+    onError: (err) => {
       console.log('[ERROR_MUTATING_DATA]', { err }),
+        toast.error('Something went wrong');
+    },
   });
 
   function onSubmit(data: z.infer<typeof RegisterSchema>) {
     createUser.mutate({
+      password: data.password,
       username: data.username,
       email: data.email,
     });
@@ -89,11 +93,34 @@ export default function RegisterForm() {
                         disabled={createUser.isPending}
                         className="focus-visible:ring-[#00AA5B]"
                         placeholder="John Doe"
+                        type="text"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
                       This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={createUser.isPending}
+                        className="focus-visible:ring-[#00AA5B]"
+                        placeholder="John Doe"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Enter your personal password
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -110,6 +137,7 @@ export default function RegisterForm() {
                         disabled={createUser.isPending}
                         placeholder="john@gmail.com"
                         className="focus-visible:ring-[#00AA5B]"
+                        type="email"
                         {...field}
                       />
                     </FormControl>

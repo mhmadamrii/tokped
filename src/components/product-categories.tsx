@@ -40,7 +40,7 @@ async function getFakeProducts(): Promise<TProduct[]> {
 
 export async function ProductCategories() {
   const fakeProducts = await getFakeProducts();
-  console.log(fakeProducts);
+  // console.log(fakeProducts);
 
   return (
     <div className="mx-4 my-4 flex justify-between gap-5 rounded-md border p-5 px-5">

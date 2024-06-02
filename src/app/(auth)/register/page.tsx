@@ -1,7 +1,16 @@
 import Image from 'next/image';
 import RegisterForm from './_components/register-form';
 
-export default function Register() {
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+
+export default async function Register() {
+  const session = await getServerSession();
+
+  if (session) {
+    redirect('/');
+  }
+
   return (
     <div className="flex h-screen flex-1 items-center justify-center gap-12 px-0 sm:px-10">
       <div className="hidden flex-col sm:flex">

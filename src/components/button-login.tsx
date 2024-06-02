@@ -1,14 +1,20 @@
+'use client';
+
 import Link from 'next/link';
 
 import { useSession } from 'next-auth/react';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { LoginSchema } from '~/lib/form-schemas';
 import { cn } from '~/lib/utils';
+import { signIn } from 'next-auth/react';
+import {
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 
 import {
   Dialog,
@@ -32,12 +38,19 @@ import {
 
 export function ButtonLogin() {
   const session = useSession();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const isFormLogin =
+    searchParams.get('form_login_user') == 'true';
+  const callbackUrl =
+    searchParams.get('callbackUrl') || '/';
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      username: '',
       email: '',
+      password: '',
     },
   });
 
@@ -45,10 +58,26 @@ export function ButtonLogin() {
     isPending: false,
   };
 
-  function onSubmit(data: z.infer<typeof LoginSchema>) {}
+  async function onSubmit(
+    data: z.infer<typeof LoginSchema>,
+  ) {
+    const responseSignIn = await signIn('credentials', {
+      redirect: false,
+      callbackUrl: '/dashboard',
+      email: data.email,
+      password: data.password,
+    });
+
+    if (!responseSignIn?.error) {
+      router.push(callbackUrl);
+    }
+  }
 
   return (
-    <Dialog>
+    <Dialog
+      defaultOpen={isFormLogin}
+      onOpenChange={() => router.push('/')}
+    >
       <DialogTrigger asChild>
         <Button className="rounded-md border border-[#00AA5B] bg-white font-bold text-[#00AA5B] hover:bg-gray-50">
           Masuk
@@ -56,35 +85,14 @@ export function ButtonLogin() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Masuk Tokopedia</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save
-            when you're done.
+            Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Rerum, ipsa.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={createUser.isPending}
-                      className="focus-visible:ring-[#00AA5B]"
-                      placeholder="John Doe"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="email"
@@ -99,6 +107,27 @@ export function ButtonLogin() {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>password</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={createUser.isPending}
+                      className="focus-visible:ring-[#00AA5B]"
+                      placeholder="John Doe"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

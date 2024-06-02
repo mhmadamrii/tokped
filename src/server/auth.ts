@@ -1,14 +1,17 @@
+import CredentialsProvider from 'next-auth/providers/credentials';
+// import DiscordProvider from 'next-auth/providers/discord';
+
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import { compare } from 'bcryptjs';
+import { env } from '~/env';
+import { db } from '~/server/db';
+import { type Adapter } from 'next-auth/adapters';
+
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from 'next-auth';
-import { type Adapter } from 'next-auth/adapters';
-import DiscordProvider from 'next-auth/providers/discord';
-
-import { env } from '~/env';
-import { db } from '~/server/db';
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -37,30 +40,57 @@ declare module 'next-auth' {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+  pages: {
+    signIn: '/?form_login_user=true',
   },
   adapter: PrismaAdapter(db) as Adapter,
+  session: {
+    strategy: 'jwt',
+  },
+  // callbacks: {
+  //   session: ({ session, user }) => ({
+  //     ...session,
+  //     user: {
+  //       ...session.user,
+  //       id: user.id,
+  //     },
+  //   }),
+  // },
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    // DiscordProvider({
+    //   clientId: env.DISCORD_CLIENT_ID,
+    //   clientSecret: env.DISCORD_CLIENT_SECRET,
+    // }),
+    CredentialsProvider({
+      credentials: {
+        email: {},
+        password: {},
+      },
+      async authorize(credentials, req) {
+        const user = await db.user.findUnique({
+          where: {
+            email: credentials?.email,
+          },
+        });
+
+        if (!credentials || !user) {
+          return null;
+        }
+
+        const correctCredential = await compare(
+          credentials?.password,
+          user?.password!,
+        );
+
+        if (correctCredential) {
+          return {
+            ...user,
+          };
+        }
+
+        return null;
+      },
     }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
 };
 

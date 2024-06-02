@@ -1,10 +1,9 @@
 import '~/styles/globals.css';
+import Navbar from '~/components/navbar';
 
 import { GeistSans } from 'geist/font/sans';
-
 import { TRPCReactProvider } from '~/trpc/react';
 import { getServerAuthSession } from '~/server/auth';
-import Navbar from '~/components/navbar';
 
 export const metadata = {
   title: 'Tokopedia',
@@ -18,7 +17,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerAuthSession();
-  console.log('session user', session);
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
