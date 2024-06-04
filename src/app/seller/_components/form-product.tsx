@@ -1,8 +1,18 @@
 'use client';
 
 import { Button } from '~/components/ui/button';
+import { Input } from '~/components/ui/input';
+import { Label } from '~/components/ui/label';
+import {
+  useRouter,
+  usePathname,
+  useSearchParams,
+} from 'next/navigation';
+import { useState } from 'react';
+
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -10,21 +20,38 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '~/components/ui/dialog';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
 
 export function FormProduct() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const isOpenForm =
+    searchParams.get('form_product') == 'true';
+
+  const handleOpenForm = () => {
+    if (isOpenForm) {
+      router.push('?form_product=true');
+    } else {
+      router.push('/seller');
+    }
+    console.log(pathname);
+  };
+
   return (
-    <Dialog>
+    <Dialog
+      defaultOpen={isOpenForm}
+      onOpenChange={handleOpenForm}
+    >
       <DialogTrigger asChild>
-        <Button variant="outline">Add new product</Button>
+        <Button variant="outline">Add product</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Add new product</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save
-            when you're done.
+            Let's ship your product together and become a
+            richman
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
