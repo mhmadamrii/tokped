@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ENDPOINT_FAKE_PRODUCTS } from '~/lib/constants';
 
 import { TProduct } from '~/lib/types';
 
@@ -8,7 +9,7 @@ async function getFakeProductById(
 ): Promise<TProduct | undefined> {
   try {
     const res = await fetch(
-      `https://fakestoreapi.com/products/${id}`,
+      `${ENDPOINT_FAKE_PRODUCTS}/${id}`,
       {
         next: { revalidate: 60 }, // Revalidate the cache every 60 seconds
       },

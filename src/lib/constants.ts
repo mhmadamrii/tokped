@@ -13,4 +13,6 @@ const BANNER_SLIDERS = [
   },
 ] as const;
 
-export { BANNER_SLIDERS };
+const ENDPOINT_FAKE_PRODUCTS = 'https://fakestoreapi.com/products'
+
+export { BANNER_SLIDERS, ENDPOINT_FAKE_PRODUCTS };

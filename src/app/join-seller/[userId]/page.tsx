@@ -1,4 +1,8 @@
-export default function JoinSeller() {
+export default function JoinSeller({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
     <div>
       join seller now
