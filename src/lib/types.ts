@@ -10,4 +10,5 @@ export type TProduct = {
   category: string;
   image: string;
   rating: TRating;
+  price?: any;
 };
