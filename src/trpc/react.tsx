@@ -1,5 +1,10 @@
 'use client';
 
+import { createTRPCReact } from '@trpc/react-query';
+import { SessionProvider } from 'next-auth/react';
+import { useState } from 'react';
+import { Toaster } from 'sonner';
+
 import {
   QueryClient,
   QueryClientProvider,
@@ -9,16 +14,13 @@ import {
   loggerLink,
   unstable_httpBatchStreamLink,
 } from '@trpc/client';
-import { createTRPCReact } from '@trpc/react-query';
+
 import {
   type inferRouterInputs,
   type inferRouterOutputs,
 } from '@trpc/server';
-import { SessionProvider } from 'next-auth/react';
-import { useState } from 'react';
-import SuperJSON from 'superjson';
-import { Toaster } from 'sonner';
 
+import SuperJSON from 'superjson';
 import { type AppRouter } from '~/server/api/root';
 
 const createQueryClient = () => new QueryClient();
