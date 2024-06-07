@@ -1,6 +1,17 @@
-import { FormProduct } from './_components/form-product';
+import dynamic from 'next/dynamic';
 import TableProducts from './_components/table-product';
+
 import { Suspense } from 'react';
+
+const FormProduct = dynamic(
+  () =>
+    import('./_components/form-product').then(
+      (mod) => mod.FormProduct,
+    ),
+  {
+    ssr: false,
+  },
+);
 
 export default function Seller() {
   return (

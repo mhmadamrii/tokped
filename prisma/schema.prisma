@@ -87,7 +87,7 @@ model Product {
 
     // relations
     categoryId Int
-    category   Category        @relation(fields: [categoryId], references: [id])
+    category   Category?       @relation(fields: [categoryId], references: [id])
     images     ProductImages[]
     userId     String
     user       User            @relation(fields: [userId], references: [id])

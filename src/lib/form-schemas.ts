@@ -26,3 +26,13 @@ export const LoginSchema = z.object({
     .min(1, { message: 'This field has to be filled.' })
     .email('This is not a valid email.'),
 });
+
+export const ProductSchema = z.object({
+  name: z.string(),
+  price: z.number(),
+  isDiscount: z.boolean(),
+  stock: z.number(),
+  description: z.string(),
+  category: z.string(),
+  images: z.string(),
+});
