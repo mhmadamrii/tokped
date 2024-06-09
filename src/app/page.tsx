@@ -1,14 +1,10 @@
 import FakeProducts from '~/components/fake-products';
-import Link from 'next/link';
 
 import { Suspense } from 'react';
 import { CarouselBanner } from '~/components/carousel-banner';
-import { getServerAuthSession } from '~/server/auth';
 import { ProductCategories } from '~/components/product-categories';
 
 export default async function Homepage() {
-  const session = await getServerAuthSession();
-
   return (
     <main>
       <CarouselBanner />

@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import { Button } from '~/components/ui/button';
 import { Switch } from '~/components/ui/switch';
-import { FormProduct } from './form-product';
 import { TProduct } from '~/lib/types';
 
 import {
