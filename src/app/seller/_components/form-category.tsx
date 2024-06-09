@@ -8,10 +8,11 @@ import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { api } from '~/trpc/react';
+import { CategorySchema } from '~/lib/form-schemas';
+import { cn } from '~/lib/utils';
 
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
 } from '~/components/ui/dialog';
 
@@ -24,16 +25,6 @@ import {
   FormLabel,
   FormMessage,
 } from '~/components/ui/form';
-import { cn } from '~/lib/utils';
-
-const FormSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-  description: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-});
 
 export function FormCategory({
   isOpen,
@@ -45,8 +36,8 @@ export function FormCategory({
   const utils = api.useUtils();
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof CategorySchema>>({
+    resolver: zodResolver(CategorySchema),
     defaultValues: {
       name: '',
       description: '',
@@ -59,7 +50,7 @@ export function FormCategory({
         utils.category.getCategory.invalidate(),
     });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof CategorySchema>) {
     createCategory.mutate({
       name: data.name,
       description: data.description,

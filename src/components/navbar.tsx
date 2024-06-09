@@ -11,6 +11,7 @@ import { useSession } from 'next-auth/react';
 import { Cart } from './cart';
 import { InputCategory } from './input-category';
 import { Button } from './ui/button';
+import { NavigationMenuBar } from './navigation-bar';
 
 const ButtonLogin = dynamic(
   () =>
@@ -56,7 +57,7 @@ export default function Navbar() {
         <InputCategory />
       </div>
 
-      <Cart />
+      <NavigationMenuBar />
 
       {session.data ? (
         <Button onClick={() => signOut()}>Sign out</Button>
