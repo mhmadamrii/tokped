@@ -80,7 +80,7 @@ export function NavigationMenuBar() {
             </svg>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="flex w-[360px] flex-col items-center justify-center text-center">
+            <div className="flex h-[400px] w-[360px] flex-col items-center justify-center text-center">
               <Image
                 width={120}
                 height={70}
@@ -112,7 +112,7 @@ export function NavigationMenuBar() {
             </svg>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div>
+            <div className="w-[360px]">
               <Image
                 width={150}
                 height={70}
@@ -142,42 +142,6 @@ export function NavigationMenuBar() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              {/* <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI
-                and Tailwind CSS.
-              </ListItem>
-              <ListItem
-                href="/docs/installation"
-                title="Installation"
-              >
-                How to install dependencies and structure
-                your app.
-              </ListItem> */}
-              <ListItem
-                href="/docs/primitives/typography"
-                title="Typography"
-              >
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            Components
-          </NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -185,31 +149,3 @@ export function NavigationMenuBar() {
     </NavigationMenu>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            className,
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">
-            {title}
-          </div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = 'ListItem';

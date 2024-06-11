@@ -40,7 +40,7 @@ export default function Navbar() {
     );
 
   return (
-    <header className="sticky left-0 right-0 top-0 z-50 flex h-[100px] items-center justify-between gap-4 border bg-white px-7">
+    <header className="sticky left-0 right-0 top-0 z-50 flex h-[100px] items-center justify-between gap-4 border bg-white px-14">
       <div className="flex gap-2">
         <Link href="/">
           <Image

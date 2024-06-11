@@ -15,9 +15,9 @@ import {
 
 export function CarouselBanner() {
   return (
-    <div className="flex h-[300px] w-full items-center justify-center px-20">
+    <div className="mt-5 flex h-[300px] w-full items-center justify-center rounded-md px-20">
       <Carousel
-        className="flex h-full w-full items-center justify-center"
+        className="flex h-full w-full items-center justify-center rounded-md"
         plugins={[
           Autoplay({
             delay: 3500,
@@ -33,8 +33,10 @@ export function CarouselBanner() {
               <Image
                 src={_.content}
                 alt="banner"
-                width={700}
-                height={300}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: '100%', height: 'auto' }} // optional
                 className="rounded-md"
               />
             </CarouselItem>

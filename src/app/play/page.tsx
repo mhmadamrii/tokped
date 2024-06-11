@@ -1,99 +1,46 @@
+import { CalendarDays } from 'lucide-react';
+
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '~/components/ui/table';
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '~/components/ui/avatar';
+import { Button } from '~/components/ui/button';
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '~/components/ui/hover-card';
 
-const invoices = [
-  {
-    invoice: 'INV001',
-    paymentStatus: 'Paid',
-    totalAmount: '$250.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV002',
-    paymentStatus: 'Pending',
-    totalAmount: '$150.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV003',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$350.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV004',
-    paymentStatus: 'Paid',
-    totalAmount: '$450.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV005',
-    paymentStatus: 'Paid',
-    totalAmount: '$550.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV006',
-    paymentStatus: 'Pending',
-    totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV007',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$300.00',
-    paymentMethod: 'Credit Card',
-  },
-];
-
-export default function TableDemo() {
+export function HoverCardDemo() {
   return (
-    <Table>
-      <TableCaption>
-        A list of your recent invoices.
-      </TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">
-            Invoice
-          </TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">
-            Amount
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">
-              {invoice.invoice}
-            </TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">
-              {invoice.totalAmount}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">
-            $2,500.00
-          </TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <Button variant="link">@nextjs</Button>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-80">
+        <div className="flex justify-between space-x-4">
+          <Avatar>
+            <AvatarImage src="https://github.com/vercel.png" />
+            <AvatarFallback>VC</AvatarFallback>
+          </Avatar>
+          <div className="space-y-1">
+            <h4 className="text-sm font-semibold">
+              @nextjs
+            </h4>
+            <p className="text-sm">
+              The React Framework – created and maintained
+              by @vercel.
+            </p>
+            <div className="flex items-center pt-2">
+              <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{' '}
+              <span className="text-xs text-muted-foreground">
+                Joined December 2021
+              </span>
+            </div>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   );
 }
