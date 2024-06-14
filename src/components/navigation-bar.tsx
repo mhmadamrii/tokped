@@ -14,49 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '~/components/ui/navigation-menu';
-
-const components: {
-  title: string;
-  href: string;
-  description: string;
-}[] = [
-  {
-    title: 'Alert Dialog',
-    href: '/docs/primitives/alert-dialog',
-    description:
-      'A modal dialog that interrupts the user with important content and expects a response.',
-  },
-  {
-    title: 'Hover Card',
-    href: '/docs/primitives/hover-card',
-    description:
-      'For sighted users to preview content available behind a link.',
-  },
-  {
-    title: 'Progress',
-    href: '/docs/primitives/progress',
-    description:
-      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
-  },
-  {
-    title: 'Scroll-area',
-    href: '/docs/primitives/scroll-area',
-    description:
-      'Visually or semantically separates content.',
-  },
-  {
-    title: 'Tabs',
-    href: '/docs/primitives/tabs',
-    description:
-      'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
-  },
-  {
-    title: 'Tooltip',
-    href: '/docs/primitives/tooltip',
-    description:
-      'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
-  },
-];
+import { Button } from './ui/button';
 
 export function NavigationMenuBar() {
   return (
@@ -80,16 +38,37 @@ export function NavigationMenuBar() {
             </svg>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="flex h-[400px] w-[360px] flex-col items-center justify-center text-center">
-              <Image
-                width={120}
-                height={70}
-                src="	https://images.tokopedia.net/img/purchase-platform/illustration/empty-state-pp.png"
-                alt="cart image"
-              />
-              <h1 className="text-xl font-bold">
-                Wah, keranjang belanjamu kosong
-              </h1>
+            <div className="flex h-[400px] w-[360px] flex-col items-center justify-start text-center">
+              <div className="mb-10 ml-[80px] mr-[80px] flex w-full items-center justify-between border px-5 pb-2 pt-2">
+                <h1 className="text-xl font-bold">
+                  Keranjang
+                </h1>
+                <h1 className="font-bold text-[#00AA5B]">
+                  Lihat
+                </h1>
+              </div>
+
+              <div className="flex h-1/2 flex-col items-center justify-center gap-3">
+                <Image
+                  width={120}
+                  height={70}
+                  src="	https://images.tokopedia.net/img/purchase-platform/illustration/empty-state-pp.png"
+                  alt="cart image"
+                />
+
+                <h1 className="text-xl font-bold leading-tight">
+                  Wah, keranjang belanjamu kosong
+                </h1>
+                <p className="text-gray-400">
+                  Yuk, isi dengan barang-barang impianmu
+                </p>
+                <Button
+                  className="hover:bg-gray-5 rounded-md border border-[#00AA5B] bg-white font-bold text-[#00AA5B] hover:text-[#00AA5B]"
+                  variant="outline"
+                >
+                  Mulai Belanja
+                </Button>
+              </div>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>

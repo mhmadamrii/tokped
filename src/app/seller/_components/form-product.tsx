@@ -12,6 +12,7 @@ import { Switch } from '~/components/ui/switch';
 import { FormCategory } from './form-category';
 import { useState } from 'react';
 import { Plus, TriangleAlert } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 
 import {
   useRouter,
@@ -50,6 +51,8 @@ import {
 export function FormProduct() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const session = useSession();
+  console.log('session user', session);
 
   const [isOpenCategoryForm, setIsOpenCategoryForm] =
     useState<boolean>(false);
@@ -59,12 +62,12 @@ export function FormProduct() {
       onSuccess: (res) => console.log(res),
     });
 
-  const {
-    data: productCategories,
-    refetch: refetchProductCategory,
-  } = api.category.getCategory.useQuery(undefined, {
-    enabled: true, // false if you need to make it fetch on demand
-  });
+  // const {
+  //   data: productCategories,
+  //   refetch: refetchProductCategory,
+  // } = api.category.getCategory.useQuery(undefined, {
+  //   enabled: true, // false if you need to make it fetch on demand
+  // });
 
   const isOpenForm =
     searchParams.get('form_product') === 'true';
@@ -73,11 +76,13 @@ export function FormProduct() {
     resolver: zodResolver(ProductSchema),
     defaultValues: {
       name: '',
-      price: 0,
+      price: '',
       isDiscount: false,
-      stock: 0,
+      stock: '',
       description: '',
-      category: '',
+      userId: 'clxd8snii0000kldoz2go1zx6',
+      // categoryId: 0,
+      // category: undefined,
     },
   });
 
@@ -90,18 +95,22 @@ export function FormProduct() {
       price: data.price,
       stock: data.stock,
       description: data.description,
-      category: 'askfdl',
-      images: data.images,
+      userId: session.data?.user.id as any,
+      // category: data.category,
+      // images: data.images,
     });
   }
 
   const handleOpenForm = () => {
+    console.log('session', session);
     if (isOpenForm) {
       router.push('/seller');
     } else {
       router.push('?form_product=true');
     }
   };
+
+  console.log(form.formState.errors);
 
   return (
     <>
@@ -166,7 +175,7 @@ export function FormProduct() {
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
@@ -174,7 +183,9 @@ export function FormProduct() {
                     <FormLabel>Category</FormLabel>
                     <div className="flex gap-3">
                       <Select
+                        name={field.name}
                         onValueChange={field.onChange}
+                        // @ts-ignore
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -188,11 +199,7 @@ export function FormProduct() {
 
                         <SelectContent>
                           <SelectGroup>
-                            <SelectLabel
-                              onClick={() =>
-                                refetchProductCategory()
-                              }
-                            >
+                            <SelectLabel>
                               Your product's category
                             </SelectLabel>
                             {productCategories?.map(
@@ -205,9 +212,6 @@ export function FormProduct() {
                                 </SelectItem>
                               ),
                             )}
-                            <SelectItem value="apple">
-                              Apple
-                            </SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -228,7 +232,7 @@ export function FormProduct() {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <FormField
                 control={form.control}
                 name="stock"

@@ -29,12 +29,11 @@ export const LoginSchema = z.object({
 
 export const ProductSchema = z.object({
   name: z.string(),
-  price: z.number(),
-  isDiscount: z.boolean(),
-  stock: z.number(),
+  price: z.string(), // Assuming price comes as a string and needs conversion
+  stock: z.string(), // Assuming stock comes as a string and needs conversion
   description: z.string(),
-  category: z.string(),
-  images: z.string(),
+  isDiscount: z.boolean().optional().default(false),
+  userId: z.string(), // userId should be included
 });
 
 export const CategorySchema = z.object({

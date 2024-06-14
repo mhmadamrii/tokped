@@ -39,7 +39,7 @@ export default async function TableProducts() {
     setTimeout(() => res(true), 1000),
   );
   const userProducts = await getUserProducts();
-  console.log(userProducts);
+  // console.log(userProducts);
 
   return (
     <Table className="w-full table-auto border-collapse">

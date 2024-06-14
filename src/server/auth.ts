@@ -92,6 +92,17 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, user }) {
+      const loggedIn = await db.user.findUnique({
+        where: {
+          email: session.user.email as any,
+        },
+      });
+      session.user.id = loggedIn!.id;
+      return session;
+    },
+  },
 };
 
 /**

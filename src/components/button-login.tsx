@@ -35,11 +35,14 @@ import {
   FormLabel,
   FormMessage,
 } from '~/components/ui/form';
+import { useEffect, useState } from 'react';
 
 export function ButtonLogin() {
   const session = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [isLoading, setIsLoading] =
+    useState<boolean>(false);
 
   const isFormLogin =
     searchParams.get('form_login_user') == 'true';
@@ -61,6 +64,7 @@ export function ButtonLogin() {
   async function onSubmit(
     data: z.infer<typeof LoginSchema>,
   ) {
+    setIsLoading(true);
     const responseSignIn = await signIn('credentials', {
       redirect: false,
       callbackUrl: '/dashboard',
@@ -70,8 +74,15 @@ export function ButtonLogin() {
 
     if (!responseSignIn?.error) {
       router.push(callbackUrl);
+      return;
     }
+
+    setIsLoading(false);
   }
+
+  useEffect(() => {
+    return () => setIsLoading(false);
+  }, []);
 
   return (
     <Dialog
@@ -137,12 +148,12 @@ export function ButtonLogin() {
                 'mt-4 w-full bg-[#00AA5B] text-gray-200 hover:bg-green-500',
                 {
                   'border border-[#00AA5B] bg-white':
-                    createUser.isPending,
+                    isLoading,
                 },
               )}
               type="submit"
             >
-              {createUser.isPending ? (
+              {isLoading ? (
                 <svg
                   aria-hidden="true"
                   className="h-6 w-6 animate-spin fill-[#00AA5B] text-white"

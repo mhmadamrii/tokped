@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ProductSchema } from '~/lib/form-schemas';
+import type { Product } from '@prisma/client';
 
 import {
   createTRPCRouter,
@@ -14,12 +15,11 @@ export const productRouter = createTRPCRouter({
       return ctx.db.product.create({
         data: {
           name: input.name,
-          price: input.price,
+          price: parseFloat(input.price), // Ensure this is a float
+          stock: parseInt(input.stock), // Ensure this is an integer
           description: input.description,
-          stock: input.stock,
-          category: input.category,
-          images: input.images,
           isDiscount: input.isDiscount,
+          userId: input.userId, // Add userId to the data
         },
       });
     }),
