@@ -119,12 +119,12 @@ export function FormProduct() {
         onOpenChange={handleOpenForm}
       >
         <DialogTrigger asChild onClick={handleOpenForm}>
-          <Button variant="outline">Add product</Button>
+          <Button variant="outline">Tambah Produk</Button>
         </DialogTrigger>
 
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Add New Product</DialogTitle>
+            <DialogTitle>Tambah Produk Baru Dengan Mudah</DialogTitle>
             <DialogDescription className="mt-2 flex items-center gap-4 rounded-md bg-[#FDDE55] px-3 py-2 text-black">
               <TriangleAlert />
               You have not category yet, please create at
@@ -138,17 +138,17 @@ export function FormProduct() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Product name</FormLabel>
+                    <FormLabel>Nama produk</FormLabel>
                     <FormControl>
                       <Input
                         disabled={createProduct.isPending}
-                        placeholder="john@gmail.com"
+                        placeholder="Kemeja Panjang"
                         className="focus-visible:ring-[#00AA5B]"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Make an appropriate name
+                      Buat nama produk yang lebih menarik
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -159,17 +159,17 @@ export function FormProduct() {
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Product price</FormLabel>
+                    <FormLabel>Harga produk</FormLabel>
                     <FormControl>
                       <Input
                         disabled={createProduct.isPending}
                         className="focus-visible:ring-[#00AA5B]"
-                        placeholder="John Doe"
+                        placeholder="10.000"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Make a suitable price
+                      Tentukan harga produk kamu
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -238,7 +238,7 @@ export function FormProduct() {
                 name="stock"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Product stock</FormLabel>
+                    <FormLabel>Stok produk</FormLabel>
                     <FormControl>
                       <Input
                         disabled={createProduct.isPending}
@@ -248,7 +248,7 @@ export function FormProduct() {
                       />
                     </FormControl>
                     <FormDescription>
-                      Your product stock
+                      Tentukan stok yang tersedia
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -259,7 +259,7 @@ export function FormProduct() {
                 name="isDiscount"
                 render={({ field }) => (
                   <FormItem className="flex justify-between">
-                    <FormLabel>Discount</FormLabel>
+                    <FormLabel>Diskon</FormLabel>
                     <FormControl>
                       <Switch
                         className="data-[state=checked]:bg-[#00AA5B]"
@@ -274,7 +274,7 @@ export function FormProduct() {
 
               <Button
                 className={cn(
-                  'mt-4 w-full bg-[#00AA5B] text-gray-200 hover:bg-green-500',
+                  'mt-4 w-full bg-[#00AA5B] text-white hover:bg-green-500',
                   {
                     'border border-[#00AA5B] bg-white':
                       createProduct.isPending,
@@ -300,7 +300,7 @@ export function FormProduct() {
                     />
                   </svg>
                 ) : (
-                  'Add Product'
+                  'Tambah Produk'
                 )}
               </Button>
             </form>

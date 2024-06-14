@@ -147,7 +147,7 @@ export function ButtonLogin() {
               className={cn(
                 'mt-4 w-full bg-[#00AA5B] text-gray-200 hover:bg-green-500',
                 {
-                  'border border-[#00AA5B] bg-white':
+                  'border border-[#00AA5B] bg-white hover:bg-white':
                     isLoading,
                 },
               )}

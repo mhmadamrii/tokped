@@ -106,6 +106,25 @@ export default function RegisterForm() {
               />
               <FormField
                 control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={createUser.isPending}
+                        placeholder="john@gmail.com"
+                        className="focus-visible:ring-[#00AA5B]"
+                        type="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
@@ -122,25 +141,6 @@ export default function RegisterForm() {
                     <FormDescription>
                       Enter your personal password
                     </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={createUser.isPending}
-                        placeholder="john@gmail.com"
-                        className="focus-visible:ring-[#00AA5B]"
-                        type="email"
-                        {...field}
-                      />
-                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
