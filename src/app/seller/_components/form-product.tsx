@@ -104,7 +104,7 @@ export function FormProduct() {
   const handleOpenForm = () => {
     console.log('session', session);
     if (isOpenForm) {
-      router.push('/seller');
+      router.back();
     } else {
       router.push('?form_product=true');
     }

@@ -12,6 +12,7 @@ import { Cart } from './cart';
 import { InputCategory } from './input-category';
 import { Button } from './ui/button';
 import { NavigationMenuBar } from './navigation-bar';
+import { LogOut } from 'lucide-react';
 
 const ButtonLogin = dynamic(
   () =>
@@ -58,8 +59,9 @@ export default function Navbar() {
       </div>
       <NavigationMenuBar />
       {session.data ? (
-        <div className='flex gap-3 items-center'>
-          <Button onClick={() => signOut()}>
+        <div className="flex items-center gap-3">
+          <Button className='flex items-center gap-2' onClick={() => signOut()}>
+            <LogOut strokeWidth={1.5} />
             Sign out
           </Button>
         </div>
