@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import TableProducts from '../_components/table-product';
 
 import { Suspense } from 'react';
+import ListCategoryProduct from '../_components/list-category-product';
 
 const FormProduct = dynamic(
   () =>
@@ -24,7 +25,11 @@ export default function Seller({
         <h1 className="text-2xl font-bold text-[#00AA5B]">
           Product Management
         </h1>
-        <FormProduct />
+
+        <div className='flex space-x-3'>
+          <ListCategoryProduct />
+          <FormProduct />
+        </div>
       </div>
       <Suspense
         fallback={<span>Loading products data</span>}

@@ -32,8 +32,6 @@ import {
 } from '~/components/ui/form';
 
 export default function RegisterForm() {
-  const session = useSession();
-
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {

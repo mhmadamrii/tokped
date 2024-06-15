@@ -15,19 +15,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from '~/components/ui/navigation-menu';
 
-import {
-  CircleUserRound,
-  ShoppingCart,
-  Store,
-} from 'lucide-react';
+import { CircleUserRound, Store } from 'lucide-react';
 
 export function NavigationMenuBar() {
   const session = useSession();
   const router = useRouter();
-  console.log('session', session);
 
   return (
     <>

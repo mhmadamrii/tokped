@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from '~/components/ui/button';
 import { Switch } from '~/components/ui/switch';
 import { TProduct } from '~/lib/types';
+import { api } from '~/trpc/server';
 
 import {
   Table,
@@ -39,7 +40,9 @@ export default async function TableProducts() {
   await new Promise((res, rej) =>
     setTimeout(() => res(true), 1000),
   );
-  const userProducts = await getUserProducts();
+  // const userProducts = await getUserProducts();
+  const userProducts = await api.product.getProducts()
+  console.log('db products', userProducts)
   // console.log(userProducts);
 
   return (
@@ -89,7 +92,7 @@ export default async function TableProducts() {
               />
             </TableCell>
             <TableCell className="px-4 py-3 font-medium">
-              {product.title}
+              {product.name}
             </TableCell>
             <TableCell className="px-4 py-3">
               ${product.price.toFixed(2)}
@@ -107,7 +110,7 @@ export default async function TableProducts() {
               {product.description}
             </TableCell>
             <TableCell className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
-              {product.category}
+              {/* {product.category} */} category
             </TableCell>
             <TableCell className="mt-3 flex h-full flex-col place-items-end justify-between space-x-2 px-4 py-3 sm:flex-row">
               <Button className="w-[70px] bg-[#00AA5B] text-white hover:bg-green-400">

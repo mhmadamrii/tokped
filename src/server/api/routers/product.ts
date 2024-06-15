@@ -9,9 +9,18 @@ import {
 } from '~/server/api/trpc';
 
 export const productRouter = createTRPCRouter({
+  getProducts: protectedProcedure.query(({ ctx }) => {
+    return ctx.db.product.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }),
+
   createProduct: protectedProcedure
     .input(ProductSchema)
     .mutation(async ({ ctx, input }) => {
+      await new Promise((res) =>
+        setTimeout(() => res(true), 0),
+      );
       return ctx.db.product.create({
         data: {
           name: input.name,

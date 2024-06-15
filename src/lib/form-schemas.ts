@@ -28,10 +28,20 @@ export const LoginSchema = z.object({
 });
 
 export const ProductSchema = z.object({
-  name: z.string(),
-  price: z.string(), // Assuming price comes as a string and needs conversion
-  stock: z.string(), // Assuming stock comes as a string and needs conversion
-  description: z.string(),
+  name: z.string().min(2, {
+    message: 'Nama produk minimal 2 karakter',
+  }),
+  price: z
+    .string()
+    .min(1, { message: 'Harga produk tidak boleh kosong' }), // Assuming price comes as a string and needs conversion
+  stock: z
+    .string()
+    .min(1, { message: 'Stok produk minimal 1' }), // Assuming stock comes as a string and needs conversion
+  description: z
+    .string()
+    .min(1, {
+      message: 'Deskripsi product minimal satu kata',
+    }),
   isDiscount: z.boolean().optional().default(false),
   userId: z.string(), // userId should be included
 });
