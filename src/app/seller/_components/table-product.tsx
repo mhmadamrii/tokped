@@ -16,6 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui/table';
+import { Shirt } from 'lucide-react';
+import { EditProduct } from './edit-product';
 
 async function getUserProducts(): Promise<TProduct[]> {
   try {
@@ -41,8 +43,8 @@ export default async function TableProducts() {
     setTimeout(() => res(true), 1000),
   );
   // const userProducts = await getUserProducts();
-  const userProducts = await api.product.getProducts()
-  console.log('db products', userProducts)
+  const userProducts = await api.product.getProducts();
+  // console.log('db products', userProducts);
   // console.log(userProducts);
 
   return (
@@ -83,13 +85,14 @@ export default async function TableProducts() {
             className="border-b border-gray-200 dark:border-gray-700"
           >
             <TableCell className="px-4 py-3">
-              <Image
+              {/* <Image
                 src={product.image}
                 alt="product placeholder"
                 width={64}
                 height={64}
                 className="rounded-md object-cover"
-              />
+              /> */}
+              <Shirt strokeWidth={1.5} />
             </TableCell>
             <TableCell className="px-4 py-3 font-medium">
               {product.name}
@@ -113,16 +116,7 @@ export default async function TableProducts() {
               {/* {product.category} */} category
             </TableCell>
             <TableCell className="mt-3 flex h-full flex-col place-items-end justify-between space-x-2 px-4 py-3 sm:flex-row">
-              <Button className="w-[70px] bg-[#00AA5B] text-white hover:bg-green-400">
-                Edit
-              </Button>
-              <Button
-                variant="outline"
-                color="red"
-                className="w-[70px] border-red-400 text-red-400 hover:bg-red-500 hover:text-white"
-              >
-                Delete
-              </Button>
+              <EditProduct productId={product.id} />
             </TableCell>
           </TableRow>
         ))}

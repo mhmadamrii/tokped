@@ -23,7 +23,6 @@ export function InputCategory() {
   };
 
   useEffect(() => {
-    console.log(name);
     setParams('name', name);
     setParams('page', 1);
     history.replaceState(

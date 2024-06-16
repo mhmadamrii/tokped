@@ -15,6 +15,16 @@ export const productRouter = createTRPCRouter({
     });
   }),
 
+  getProductById: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.product.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
+
   createProduct: protectedProcedure
     .input(ProductSchema)
     .mutation(async ({ ctx, input }) => {
@@ -24,11 +34,11 @@ export const productRouter = createTRPCRouter({
       return ctx.db.product.create({
         data: {
           name: input.name,
-          price: parseFloat(input.price), // Ensure this is a float
-          stock: parseInt(input.stock), // Ensure this is an integer
+          price: parseFloat(input.price),
+          stock: parseInt(input.stock),
           description: input.description,
           isDiscount: input.isDiscount,
-          userId: input.userId, // Add userId to the data
+          userId: input.userId,
         },
       });
     }),
