@@ -4,7 +4,6 @@ import NavigationBar from '~/components/NavigationBar';
 import { GeistSans } from 'geist/font/sans';
 import { TRPCReactProvider } from '~/trpc/react';
 import { getServerAuthSession } from '~/server/auth';
-import { NavigationMenuBar } from '~/components/NavigationMenuUser';
 
 export const metadata = {
   title: 'Tokopedia',
