@@ -1,10 +1,10 @@
 import '~/styles/globals.css';
-import Navbar from '~/components/navbar';
+import NavigationBar from '~/components/NavigationBar';
 
 import { GeistSans } from 'geist/font/sans';
 import { TRPCReactProvider } from '~/trpc/react';
 import { getServerAuthSession } from '~/server/auth';
-import { NavigationMenuBar } from '~/components/navigation-bar';
+import { NavigationMenuBar } from '~/components/NavigationMenuUser';
 
 export const metadata = {
   title: 'Tokopedia',
@@ -24,7 +24,7 @@ export default async function RootLayout({
       <body>
         <TRPCReactProvider>
           <div className="flex w-full flex-col justify-center  sm:min-w-[500px]">
-            <Navbar />
+            <NavigationBar />
             <div className="mx-auto w-full flex-grow sm:max-w-[1300px]">
               {children}
             </div>

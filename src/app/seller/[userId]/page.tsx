@@ -1,15 +1,16 @@
 import dynamic from 'next/dynamic';
 import TableProducts from '../_components/table-product';
+import ListCategoryProduct from '../_components/list-category-product';
 
 import { Suspense } from 'react';
-import ListCategoryProduct from '../_components/list-category-product';
 import { api } from '~/trpc/server';
 
-const FormProduct = dynamic(
+
+const FormDialogProductTransactiong = dynamic(
   () =>
-    import('../_components/form-product').then(
-      (mod) => mod.FormProduct,
-    ),
+    import(
+      '~/components/FormDialogProductTransaction'
+    ).then((mod) => mod.default),
   {
     ssr: false,
   },
@@ -26,7 +27,7 @@ export default async function Seller({
     id: searchParams.edit_product_id ?? '',
   });
 
-  console.log('product by id', productById)
+  console.log('product by id', productById);
   return (
     <div className="container mx-auto px-4 py-8 md:px-6">
       <div className="mb-6 flex items-center justify-between">
@@ -36,7 +37,7 @@ export default async function Seller({
 
         <div className="flex space-x-3">
           <ListCategoryProduct />
-          <FormProduct
+          <FormDialogProductTransactiong
             productById={productById}
           />
         </div>

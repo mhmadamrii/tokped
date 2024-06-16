@@ -3,7 +3,7 @@
 import { Button } from '~/components/ui/button';
 import { useRouter } from 'next/navigation';
 
-export function EditProduct({
+export function TableProductButtonActions({
   productId,
 }: {
   productId: string;
@@ -11,7 +11,7 @@ export function EditProduct({
   const router = useRouter();
 
   const handlePushAction = (id: string) => {
-    router.push(`?edit_product_id=${id}`);
+    router.push(`?edit_product_id=${id}&form_product=true`);
   };
 
   return (

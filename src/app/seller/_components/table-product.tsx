@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '~/components/ui/table';
 import { Shirt } from 'lucide-react';
-import { EditProduct } from './edit-product';
+import { TableProductButtonActions } from './edit-product';
 
 async function getUserProducts(): Promise<TProduct[]> {
   try {
@@ -101,10 +101,11 @@ export default async function TableProducts() {
               ${product.price.toFixed(2)}
             </TableCell>
             <TableCell className="px-4 py-3">
-              {product.id}
+              {product.stock}
             </TableCell>
             <TableCell className="px-4 py-3">
               <Switch
+                defaultChecked={product.isDiscount}
                 className="data-[state=checked]:bg-[#00AA5B]"
                 id="airplane-mode"
               />
@@ -116,7 +117,7 @@ export default async function TableProducts() {
               {/* {product.category} */} category
             </TableCell>
             <TableCell className="mt-3 flex h-full flex-col place-items-end justify-between space-x-2 px-4 py-3 sm:flex-row">
-              <EditProduct productId={product.id} />
+              <TableProductButtonActions productId={product.id} />
             </TableCell>
           </TableRow>
         ))}

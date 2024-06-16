@@ -19,7 +19,7 @@ import {
 
 import { CircleUserRound, Store } from 'lucide-react';
 
-export function NavigationMenuBar() {
+export default function NavigationMenuBar() {
   const session = useSession();
   const router = useRouter();
 

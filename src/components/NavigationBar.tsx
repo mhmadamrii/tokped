@@ -4,25 +4,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HoverCategory from '~/app/(auth)/login/_components/hover-category';
 import dynamic from 'next/dynamic';
+import InputCategory from './InputCategory';
+import NavigationMenuBar from './NavigationMenuUser';
 
 import { signOut } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { Cart } from './cart';
-import { InputCategory } from './input-category';
 import { Button } from './ui/button';
-import { NavigationMenuBar } from './navigation-bar';
 import { LogOut } from 'lucide-react';
 
-const ButtonLogin = dynamic(
+const ButtonGroupNavbar = dynamic(
   () =>
-    import('./button-login').then((mod) => mod.ButtonLogin),
+    import('./ButtonGroupNavbar').then((mod) => mod.ButtonGroupNavbar),
   {
     ssr: false,
   },
 );
 
-export default function Navbar() {
+export default function NavigationBar() {
   const session = useSession();
   const pathname = usePathname();
 
@@ -67,7 +66,7 @@ export default function Navbar() {
         </div>
       ) : (
         <div className="flex gap-2">
-          <ButtonLogin />
+          <ButtonGroupNavbar />
           <Link
             href="/register"
             className="flex w-[80px] items-center justify-center rounded-md bg-[#00AA5B] font-bold text-white hover:bg-green-500"

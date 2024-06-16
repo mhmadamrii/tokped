@@ -38,7 +38,7 @@ async function getFakeProducts(): Promise<TProduct[]> {
   }
 }
 
-export async function ProductCategories() {
+export default async function ProductCategorySlider() {
   const fakeProducts = await getFakeProducts();
 
   return (

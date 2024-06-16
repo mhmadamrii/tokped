@@ -8,7 +8,7 @@ import {
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Input } from './ui/input';
 
-export function InputCategory() {
+export default function InputCategory() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const pathname = usePathname();

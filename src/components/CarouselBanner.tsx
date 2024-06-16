@@ -13,7 +13,7 @@ import {
   CarouselPrevious,
 } from '~/components/ui/carousel';
 
-export function CarouselBanner() {
+export default function CarouselBanner() {
   return (
     <div className="mt-5 flex h-[300px] w-full items-center justify-center rounded-md px-20">
       <Carousel

@@ -37,7 +37,7 @@ import {
 } from '~/components/ui/form';
 import { useEffect, useState } from 'react';
 
-export function ButtonLogin() {
+export function ButtonGroupNavbar() {
   const session = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
