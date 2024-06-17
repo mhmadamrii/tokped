@@ -5,7 +5,6 @@ import ListCategoryProduct from '../_components/list-category-product';
 import { Suspense } from 'react';
 import { api } from '~/trpc/server';
 
-
 const FormDialogProductTransactiong = dynamic(
   () =>
     import(
@@ -23,11 +22,11 @@ export default async function Seller({
   params: { userId: string };
   searchParams: { edit_product_id: string };
 }) {
+  const userId = params.userId;
   const productById = await api.product.getProductById({
     id: searchParams.edit_product_id ?? '',
   });
 
-  console.log('product by id', productById);
   return (
     <div className="container mx-auto px-4 py-8 md:px-6">
       <div className="mb-6 flex items-center justify-between">
@@ -45,7 +44,7 @@ export default async function Seller({
       <Suspense
         fallback={<span>Loading products data</span>}
       >
-        <TableProducts />
+        <TableProducts userId={userId} />
       </Suspense>
     </div>
   );

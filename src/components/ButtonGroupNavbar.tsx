@@ -36,6 +36,7 @@ import {
   FormMessage,
 } from '~/components/ui/form';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export function ButtonGroupNavbar() {
   const session = useSession();
@@ -72,9 +73,13 @@ export function ButtonGroupNavbar() {
       password: data.password,
     });
 
+    console.log('response login', responseSignIn);
+
     if (!responseSignIn?.error) {
       router.push(callbackUrl);
       return;
+    } else {
+      toast.error('User not found!');
     }
 
     setIsLoading(false);

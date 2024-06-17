@@ -9,6 +9,16 @@ import {
 } from '~/server/api/trpc';
 
 export const productRouter = createTRPCRouter({
+  getProductsByUserId: protectedProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.product.findMany({
+        where: {
+          userId: input.userId,
+        },
+      });
+    }),
+
   getProducts: protectedProcedure.query(({ ctx }) => {
     return ctx.db.product.findMany({
       orderBy: { createdAt: 'desc' },

@@ -12,18 +12,27 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Button } from './ui/button';
 import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const ButtonGroupNavbar = dynamic(
   () =>
-    import('./ButtonGroupNavbar').then((mod) => mod.ButtonGroupNavbar),
+    import('./ButtonGroupNavbar').then(
+      (mod) => mod.ButtonGroupNavbar,
+    ),
   {
     ssr: false,
   },
 );
 
 export default function NavigationBar() {
+  const router = useRouter();
   const session = useSession();
   const pathname = usePathname();
+
+  const handleLogOut = async () => {
+    await signOut();
+    router.push('/');
+  };
 
   if (pathname == '/register')
     return (
@@ -59,7 +68,10 @@ export default function NavigationBar() {
       <NavigationMenuBar />
       {session.data ? (
         <div className="flex items-center gap-3">
-          <Button className='flex items-center gap-2' onClick={() => signOut()}>
+          <Button
+            className="flex items-center gap-2"
+            onClick={handleLogOut}
+          >
             <LogOut strokeWidth={1.5} />
             Sign out
           </Button>
